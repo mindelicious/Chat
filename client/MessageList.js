@@ -11,12 +11,12 @@ const Message = props => (
 const MessageList = props => (
     <div className={style.messageList}>
         {
-            props.message.map((meesage, i) => {
+            props.message.map((item, i) => {
                 return (
                     <Message
                         key={i}
-                        from={meesage.from}
-                        text={message.text}
+                        from={item.from}
+                        text={item.text}
                     />
                 );
             })

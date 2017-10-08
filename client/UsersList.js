@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './UserList.css';
+import styles from './UsersList.css';
 
 const UsersList = props => (
   <div className={styles.Users}>
