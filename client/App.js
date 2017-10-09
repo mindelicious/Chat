@@ -1,4 +1,4 @@
-import Reacy, { Component } from 'react';
+import React, { Component } from 'react';
 import io from 'socket.io-client';
 import style from './App.css';
 
@@ -7,7 +7,7 @@ import MessageList from './MessageList';
 import UsersList from './UsersList';
 import UserForm from './UserForm';
 
-const socket = io('/');
+const socket = io('http://localhost:3000');
 
 class App extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class App extends Component {
                     />
                     <div className={style.MessageWrapper}>
                         <MessageList
-                        message={this.state.name}
+                        message={this.state.message}
                         />
                         <MessageForm
                         onMessageSubmit={message => this.handleMessageSubmit(message)}
@@ -51,13 +51,13 @@ class App extends Component {
     }
 
     componentDidMount() {
-        socket.on('message', message => this.messageRecieve(message));
+        socket.on('message', message => this.messageReceive(message));
         socket.on('update', ({users}) => this.chatUpdate(users));
     }
 
     messageReceive(message) {
-        const messages = [message, ...this.state.messages];
-        this.setState({messages});
+        const messages = [message, ...this.state.message];
+        this.setState({message: messages});
     }
 
     chatUpdate(users) {
@@ -65,8 +65,8 @@ class App extends Component {
     }  
 
     handleMessageSubmit(message) {
-        const messages = [message, ...this.state.messages];
-        this.setState({messages});
+        const newMessage = [message, ...this.state.message];
+        this.setState({message: newMessage});
         socket.emit('message', message);
     }  
 

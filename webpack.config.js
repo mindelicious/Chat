@@ -7,12 +7,12 @@ var path = require('path');
 module.exports = {
     entry: (env !== 'production' ? [
         'react-hot-loader/patch',
-        'webpack-dev-server/client?http://loclalhost:8080',
+        'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
-        ] : []).concat(['./client/index/js']),
-        output: {
-        filename: './bundle.js',
-        path: __dirname = path.resolve(path.dirname('public')),
+    ] : []).concat(['./client/index.js']),
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'public'),
     },
     module: {
         rules: [
@@ -35,15 +35,16 @@ module.exports = {
             }
         ]
     },
-    plugins: [new HtmlWebpackPlugin({
-        template: 'src/index.html',
-        filname: 'index.html',
-        inject: 'body',
-    }),
-   // new webpack.optimize.UglifyJsPlugin,
-    new OptimizeJsPlugin({
-        sourceMap: false
-    })
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'client/index.html',
+            filename: 'index.html',
+            inject: 'body',
+        }),
+        // new webpack.optimize.UglifyJsPlugin,
+        new OptimizeJsPlugin({
+            sourceMap: false
+        })
     ]
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import style from './MessageForm.css';
 
-class MessageForm extends Components {
+class MessageForm extends React.Component {
     constructor(props) {
+        super(props);
         this.state = {text: ''};
     }
 
